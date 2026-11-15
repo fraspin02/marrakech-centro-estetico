@@ -6,6 +6,25 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var WA = 'https://wa.me/393206223880?text=';
 
+  /* Link all'app di prenotazione. TODO-CLIENTE: incollare qui gli indirizzi dell'app negli store.
+     Finché sono vuoti, i pulsanti portano alla sezione "Prenota" della home. */
+  var APP_LINKS = {
+    ios: '',      // es. https://apps.apple.com/it/app/...
+    android: ''   // es. https://play.google.com/store/apps/details?id=...
+  };
+  (function () {
+    var ua = navigator.userAgent;
+    var guess = /iPhone|iPad|iPod|Macintosh/.test(ua) ? 'ios' : (/Android/.test(ua) ? 'android' : '');
+    $$('[data-store]').forEach(function (a) {
+      var k = a.getAttribute('data-store');
+      var url = k === 'auto' ? APP_LINKS[guess] : APP_LINKS[k];
+      if (!url) return;
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+  })();
+
   /* Intestazione compatta dopo lo scroll + barra contatti mobile */
   var header = $('#header');
   var bar = $('#mobile-bar');
@@ -195,21 +214,4 @@
       if (d.open) faqs.forEach(function (o) { if (o !== d) o.open = false; });
     });
   });
-
-  /* Mappa Google caricata solo su richiesta: nessun cookie di terze parti prima del click */
-  var mapBtn = $('#carica-mappa');
-  if (mapBtn) {
-    mapBtn.addEventListener('click', function () {
-      var box = $('#mappa');
-      var f = document.createElement('iframe');
-      f.src = 'https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1sMarrakech+Centro+Estetico,+Via+Napoli+95A,+84092+Bellizzi+SA!6i16';
-      f.title = 'Mappa: Marrakech Centro Estetico, Via Napoli 95A, Bellizzi';
-      f.loading = 'lazy';
-      f.referrerPolicy = 'no-referrer-when-downgrade';
-      f.setAttribute('allowfullscreen', '');
-      box.innerHTML = '';
-      box.appendChild(f);
-      f.focus();
-    });
-  }
 })();
