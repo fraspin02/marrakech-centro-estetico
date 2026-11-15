@@ -15,3 +15,14 @@
     f.focus();
   });
 })();
+
+// Intestazione: il logo piccolo compare solo quando il logo grande dell'apertura esce dallo schermo.
+(function () {
+  var header = document.getElementById('header');
+  var logo = document.getElementById('hero-logo');
+  if (!header || !logo) return;
+  if (!('IntersectionObserver' in window)) { header.classList.add('is-stuck'); return; }
+  new IntersectionObserver(function (entries) {
+    header.classList.toggle('is-stuck', !entries[0].isIntersecting);
+  }, { rootMargin: '-40px 0px 0px 0px' }).observe(logo);
+})();

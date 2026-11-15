@@ -10,34 +10,30 @@
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" href="fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cinzel-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:"Cormorant Garamond";font-weight:600;font-display:swap;src:url(fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2")}
-@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2")}
+@font-face{font-family:"Cinzel";font-weight:400;font-display:swap;src:url(fonts/cinzel-latin-400-normal.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-weight:100 900;font-display:swap;src:url(fonts/inter-latin-wght-normal.woff2) format("woff2")}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F8F2EA;color:#2B211C;font:400 1rem/1.6 "Inter",system-ui,Arial,sans-serif;padding:1.25rem;text-align:center}
-main{max-width:30rem}
-.arch{width:7rem;height:9rem;margin:0 auto 1.5rem;border-radius:999px 999px 0 0;background:linear-gradient(#D99A78,#9C4A2F);position:relative}
-.arch::after{content:"";position:absolute;inset:.9rem .9rem 0;border:2px solid #D9B77A;border-bottom:0;border-radius:999px 999px 0 0}
-.brand{font:italic 500 1.6rem/1 "Cormorant Garamond",Georgia,serif;margin:0 0 .5rem}
-h1{font:600 clamp(2.2rem,8vw,3rem)/1.1 "Cormorant Garamond",Georgia,serif;margin:0 0 .75rem}
-p{color:#6A5546}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#FCF3E4 url(img/hero-sfondo-1000.webp) center/cover;color:#2E2620;font:400 1rem/1.7 "Inter",system-ui,Arial,sans-serif;padding:1.25rem;text-align:center}
+main{max-width:32rem}
+.brand{display:block;width:min(18rem,70vw);height:auto;margin:0 auto 1.5rem}
+h1{font:400 clamp(1.5rem,6vw,2.1rem)/1.2 "Cinzel",Georgia,serif;letter-spacing:.05em;color:#80612C;margin:0 0 .75rem}
+p{color:#66574B}
 .actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-top:1.5rem}
-a.btn{display:inline-flex;align-items:center;min-height:3rem;padding:.7rem 1.4rem;border-radius:999px;font-weight:600;text-decoration:none;border:1.5px solid #2B211C;color:#2B211C}
-a.btn.wa{background:#1E6B45;border-color:#1E6B45;color:#fff}
-a:focus-visible{outline:3px solid #9C4A2F;outline-offset:3px}
+a.btn{display:inline-flex;align-items:center;min-height:3rem;padding:.75rem 1.5rem;border-radius:999px;font:600 .82rem/1.2 "Inter",sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid #2E2620;color:#2E2620;background:rgba(255,252,247,.6)}
+a.btn.gold{background:linear-gradient(180deg,#8C6A33,#6E5122);border-color:transparent;color:#FFF8EC}
+a:focus-visible{outline:2px solid #80612C;outline-offset:3px}
 </style>
 </head>
 <body>
 <main>
-  <div class="arch" aria-hidden="true"></div>
-  <p class="brand">Marrakech</p>
+  <img class="brand" src="img/logo-marrakech-grande.svg" width="597" height="410" alt="Marrakech Centro Estetico">
   <h1>Pagina non trovata</h1>
   <p>La pagina che cerchi non esiste o è stata spostata. Torna alla home di Marrakech Centro Estetico, in Via Napoli, 95A, 84092 Bellizzi SA.</p>
   <div class="actions">
     <a class="btn" href="./">Torna alla home</a>
-    <a class="btn wa" href="https://wa.me/393206223880" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
+    <a class="btn gold" href="https://wa.me/393206223880" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
   </div>
 </main>
 </body>
