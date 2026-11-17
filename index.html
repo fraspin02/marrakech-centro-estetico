@@ -41,7 +41,7 @@
 <link rel="preload" as="image" href="img/amb-cabina-1536.webp" imagesrcset="img/amb-cabina-960.webp 960w, img/amb-cabina-1536.webp 1536w" imagesizes="(max-width: 900px) 100vw, 50vw">
 
 <script>document.documentElement.className += ' js';</script>
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 
 <script type="application/ld+json">
 {
@@ -188,7 +188,7 @@
         </div>
         <a class="float-card" href="prodotti.html" data-parallax="-0.08">
           <img src="img/p-tonico-idratante-600.webp" width="600" height="600" alt="">
-          <span><small>Linea Marrakech</small><strong>11 prodotti professionali</strong><em>Scoprili <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></em></span>
+          <span><small>Linea Marrakech</small><strong><span data-product-count>11</span> prodotti professionali</strong><em>Scoprili <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></em></span>
         </a>
         <svg class="hero-star" aria-hidden="true"><use href="#o-star"/></svg>
       </div>
@@ -320,7 +320,7 @@
       </header>
 
 
-      <ul class="pgrid" id="pgrid">
+      <ul class="pgrid" id="pgrid" data-source="featured" data-limit="4">
         <li class="pcard" data-cat="viso" data-slug="latte-detergente">
           <button class="pcard-hit" type="button" aria-haspopup="dialog"><span class="sr">Dettagli: Latte detergente</span></button>
           <figure class="pimg"><img src="img/p-latte-detergente-600.webp" width="600" height="600" loading="lazy" decoding="async" alt="Latte detergente Marrakech viso e occhi, flacone bianco con dosatore"></figure>
@@ -394,7 +394,7 @@
       </ul>
 
       <div class="shop-more reveal">
-        <a class="btn btn-dark" href="prodotti.html">Vedi tutti i prodotti<span class="count">11</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-dark" href="prodotti.html">Vedi tutti i prodotti<span class="count" data-product-count>11</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -636,6 +636,6 @@
   </div>
 </dialog>
 
-<script src="js/main.js?v=7" defer></script>
+<script src="js/main.js?v=8" defer></script>
 </body>
 </html>
