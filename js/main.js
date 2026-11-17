@@ -155,7 +155,7 @@
   var dlg = $('#pdialog');
   if (dlg && typeof dlg.showModal === 'function' && cards.length) {
     var pdIn = $('.pd-in', dlg);
-    var pdImg = $('#pd-img'), pdCat = $('#pd-cat'), pdTitle = $('#pd-title'), pdMore = $('#pd-more'), pdWa = $('#pd-wa'), pdCount = $('#pd-count');
+    var pdImg = $('#pd-img'), pdCat = $('#pd-cat'), pdTitle = $('#pd-title'), pdMore = $('#pd-more'), pdWa = $('#pd-wa');
     var current = 0, lastFocus = null;
     function visible() { return cards.filter(function (c) { return !c.classList.contains('is-hidden'); }); }
     function fill(card) {
@@ -171,7 +171,6 @@
       pdMore.innerHTML = $('.pmore', card).innerHTML;
       pdWa.href = WA + encodeURIComponent('Ciao Marrakech! Vorrei informazioni su: ' + name + '. È disponibile in centro?');
       pdWa.setAttribute('aria-label', 'Chiedi disponibilità su WhatsApp: ' + name);
-      pdCount.textContent = (current + 1) + ' / ' + list.length;
       if (!reduce) { pdIn.classList.remove('is-swap'); void pdIn.offsetWidth; pdIn.classList.add('is-swap'); }
     }
     function step(d) {
@@ -185,8 +184,6 @@
         dlg.showModal();
       });
     });
-    $('#pd-prev').addEventListener('click', function () { step(-1); });
-    $('#pd-next').addEventListener('click', function () { step(1); });
     $('[data-close]', dlg).addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
     dlg.addEventListener('keydown', function (e) {
