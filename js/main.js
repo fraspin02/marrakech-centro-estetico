@@ -153,140 +153,21 @@
         return r.json();
       }, function (e) { clearTimeout(t); throw e; });
   }
-  /** URL immagine dell'API: i percorsi relativi (/uploads, /static) diventano assoluti; solo http(s). */
-  function mediaUrl(u) {
-    if (!u) return '';
-    if (/^https?:\/\//i.test(u)) return u;
-    return u.charAt(0) === '/' ? API_BASE + u : '';
-  }
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-  /** Titolo con *parte in evidenza* → HTML con <em>. */
-  function titleHtml(t) { return esc(t).replace(/\*([^*]+)\*/g, '<em>$1</em>'); }
-  function plain(t) { return String(t || '').replace(/\*/g, ''); }
-
-  /* Markdown degli articoli: ## titoli, elenchi, **grassetto**, *corsivo*, [link](url), tabelle, "> " nota.
-     Il testo viene prima "escapato": l'HTML scritto nell'articolo non passa. I link accettano solo
-     http(s), mailto, tel o percorsi del sito (niente "javascript:": i due punti non sono ammessi). */
-  function inline(s) {
-    return esc(s)
-      .replace(/\[([^\]]+)\]\(((?:https?:\/\/|mailto:|tel:)[^\s)]*|[\w.\/#?=&%-]+)\)/g, function (_, txt, url) {
-        var ext = /^https?:/i.test(url);
-        return '<a href="' + url + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + txt + '</a>';
-      })
-      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*([^*]+)\*/g, '<em>$1</em>');
-  }
-  function markdown(md) {
-    var lines = String(md || '').replace(/\r\n?/g, '\n').split('\n');
-    var out = [], para = [], i = 0;
-    var cells = function (l) { return l.trim().replace(/^\||\|$/g, '').split('|').map(function (c) { return c.trim(); }); };
-    function flush() { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } }
-    while (i < lines.length) {
-      var l = lines[i], m;
-      if (!l.trim()) { flush(); i++; continue; }
-      if ((m = /^(#{2,3})\s+(.*)$/.exec(l))) {
-        flush();
-        var h = m[1].length === 2 ? 'h2' : 'h3';
-        out.push('<' + h + '>' + inline(m[2]) + '</' + h + '>');
-        i++;
-        continue;
-      }
-      if (/^\s*[-*]\s+/.test(l) || /^\s*\d+[.)]\s+/.test(l)) {
-        flush();
-        var ordered = /^\s*\d/.test(l), items = [];
-        var itemRe = ordered ? /^\s*\d+[.)]\s+/ : /^\s*[-*]\s+/;
-        while (i < lines.length && itemRe.test(lines[i])) {
-          items.push('<li>' + inline(lines[i].replace(itemRe, '')) + '</li>');
-          i++;
-        }
-        out.push((ordered ? '<ol>' : '<ul>') + items.join('') + (ordered ? '</ol>' : '</ul>'));
-        continue;
-      }
-      if (/^\s*\|/.test(l)) {
-        flush();
-        var rows = [];
-        while (i < lines.length && /^\s*\|/.test(lines[i])) { rows.push(lines[i]); i++; }
-        var head = rows.length > 1 && /^\s*\|?\s*:?-{3,}/.test(rows[1]) ? cells(rows[0]) : null;
-        var body = rows.slice(head ? 2 : 0).map(function (r) {
-          return '<tr>' + cells(r).map(function (c) { return '<td>' + inline(c) + '</td>'; }).join('') + '</tr>';
-        });
-        out.push('<table class="price-table">' +
-          (head ? '<thead><tr>' + head.map(function (c) { return '<th>' + inline(c) + '</th>'; }).join('') + '</tr></thead>' : '') +
-          '<tbody>' + body.join('') + '</tbody></table>');
-        continue;
-      }
-      if (/^>\s?/.test(l)) {
-        flush();
-        var note = [];
-        while (i < lines.length && /^>\s?/.test(lines[i])) { note.push(lines[i].replace(/^>\s?/, '')); i++; }
-        out.push('<p class="small">' + inline(note.join(' ')) + '</p>');
-        continue;
-      }
-      para.push(l.trim());
-      i++;
-    }
-    flush();
-    return out.join('\n');
-  }
-
-  var MONTHS = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
-  function dateIt(iso) {
-    var d = String(iso || '').slice(0, 10).split('-');
-    return d.length === 3 ? (+d[2]) + ' ' + MONTHS[+d[1] - 1] + ' ' + d[0] : '';
-  }
+  // Rendering condiviso con l'Action che genera le pagine statiche (js/render.js, caricato solo
+  // nelle pagine con prodotti o articoli).
+  var MK = window.MK;
 
   /* ---------------------------------------------------------------- prodotti */
-  var CAT = { VISO: 'Viso', ANTIAGE: 'Antiage', CORPO: 'Corpo', PIEDI: 'Piedi' };
-  var AVAIL = { ON_ORDER: 'Su ordinazione', OUT_OF_STOCK: 'Esaurito' };
   var grid = $('#pgrid');
   var filtersBox = $('.filters');
   var cards = function () { return grid ? $$('.pcard', grid) : []; };
 
-  function productCard(p) {
-    var img = mediaUrl(p.imageUrl);
-    var more = '';
-    if (p.description) more += '<p>' + esc(p.description) + '</p>';
-    if (p.howToUse) more += '<h4>Come si usa</h4><p>' + esc(p.howToUse) + '</p>';
-    if (p.tryInStore) more += '<h4>Da provare in centro</h4><p>' + esc(p.tryInStore) + '</p>';
-    if (p.highlights && p.highlights.length) {
-      more += '<h4>In evidenza</h4><ul class="chips">' + p.highlights.map(function (h) { return '<li>' + esc(h) + '</li>'; }).join('') + '</ul>';
-    }
-    if (AVAIL[p.availability]) more += '<p class="small">' + AVAIL[p.availability] + ': chiedici quando torna disponibile.</p>';
-    return '<li class="pcard" data-cat="' + esc(String(p.category || '').toLowerCase()) + '" data-slug="' + esc(p.slug) + '" data-img="' + esc(img) + '">' +
-      '<button class="pcard-hit" type="button" aria-haspopup="dialog"><span class="sr">Dettagli: ' + esc(p.name) + '</span></button>' +
-      '<figure class="pimg">' +
-      (img ? '<img src="' + esc(img) + '" width="600" height="600" loading="lazy" decoding="async" alt="' + esc(p.imageAlt || p.name) + '">' : '') +
-      (AVAIL[p.availability] ? '<span class="pbadge">' + AVAIL[p.availability] + '</span>' : '') +
-      '</figure>' +
-      '<div class="pbody"><p class="pcat">' + esc(p.tagline || CAT[p.category] || '') + '</p><h3>' + esc(p.name) + '</h3>' +
-      (p.summary ? '<p class="pdesc">' + esc(p.summary) + '</p>' : '') + '</div>' +
-      '<div class="pmore" hidden>' + more + '</div></li>';
-  }
-
   function renderProducts(list) {
-    var shown = list;
-    if (grid.getAttribute('data-source') === 'featured') {
-      var limit = +grid.getAttribute('data-limit') || 4;
-      shown = list.filter(function (p) { return p.featured; })
-        .concat(list.filter(function (p) { return !p.featured; }))
-        .slice(0, limit);
-    }
-    grid.innerHTML = shown.length
-      ? shown.map(productCard).join('')
-      : '<li class="pempty">Stiamo rinnovando la vetrina: scrivici su WhatsApp per i prodotti disponibili.</li>';
+    var shown = MK.pickProducts(list, grid.getAttribute('data-source'), +grid.getAttribute('data-limit'));
+    grid.innerHTML = MK.productGrid(shown, API_BASE);
     $$('[data-product-count]').forEach(function (el) { el.textContent = String(list.length); });
     if (filtersBox) {
-      var order = ['VISO', 'ANTIAGE', 'CORPO', 'PIEDI'], counts = {};
-      list.forEach(function (p) { counts[p.category] = (counts[p.category] || 0) + 1; });
-      var btn = function (f, label, n, on) {
-        return '<button type="button" class="chip-btn' + (on ? ' is-on' : '') + '" data-filter="' + f + '" aria-pressed="' + on + '">' + label + ' <span>' + n + '</span></button>';
-      };
-      filtersBox.innerHTML = btn('tutti', 'Tutti', list.length, true) +
-        order.filter(function (c) { return counts[c]; }).map(function (c) { return btn(c.toLowerCase(), CAT[c], counts[c], false); }).join('');
+      filtersBox.innerHTML = MK.filterButtons(list);
       filtersBox.hidden = list.length === 0;
     }
     bindCatalog();
@@ -372,22 +253,21 @@
   if (grid) {
     bindCatalog(); // schede statiche, subito utilizzabili
     getJSON('/products').then(function (list) {
-      if (Array.isArray(list)) renderProducts(list);
+      if (MK && Array.isArray(list)) renderProducts(list);
     }, function () { /* API non raggiungibile: restano le schede dell'HTML */ });
   }
 
   /* ---------------------------------------------------------------- blog */
-  // Articoli che hanno già una pagina statica (indicizzata): si linkano lì. Gli altri usano articolo.html.
-  var LEGACY_POSTS = { 'semipermanente-ricostruzione-refill': 1, 'epilazione-laser-prima-seduta': 1, 'bagno-turco': 1 };
-  function postUrl(slug) { return LEGACY_POSTS[slug] ? 'blog-' + slug + '.html' : 'articolo.html?a=' + encodeURIComponent(slug); }
+  // Gli articoli con una pagina statica (generata dall'Action, D22) si linkano lì. Quelli appena
+  // pubblicati, finché l'Action non ha girato, usano articolo.html?a=<indirizzo>.
+  var staticPosts = {};
+  $$('a[href^="blog-"]').forEach(function (a) {
+    var m = /^blog-([a-z0-9-]+)\.html$/.exec(a.getAttribute('href'));
+    if (m) staticPosts[m[1]] = 1;
+  });
+  function postUrl(slug) { return staticPosts[slug] ? MK.postPage(slug) : 'articolo.html?a=' + encodeURIComponent(slug); }
   function postCard(a, hTag) {
-    var img = mediaUrl(a.coverUrl);
-    return '<li class="bcard reveal is-in"><a href="' + esc(postUrl(a.slug)) + '">' +
-      '<figure class="bimg">' + (img ? '<img src="' + esc(img) + '" width="800" height="1000" loading="lazy" decoding="async" alt="">' : '') + '</figure>' +
-      '<div class="bbody"><p class="pcat">' + esc(a.category) + ' · ' + a.readingMinutes + ' min</p>' +
-      '<' + hTag + '>' + esc(plain(a.title)) + '</' + hTag + '>' +
-      '<p>' + esc(a.excerpt) + '</p>' +
-      '<span class="link-arrow">Leggi<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></div></a></li>';
+    return MK.postCard(a, hTag, API_BASE, postUrl(a.slug)).replace('class="bcard reveal"', 'class="bcard reveal is-in"');
   }
 
   var post = $('article.post');
@@ -396,22 +276,22 @@
   // Elenco del blog (blog.html) e "Leggi anche" sotto gli articoli.
   var blogGrid = $('#bgrid');
   var moreGrid = $('#bgrid-more');
-  if (blogGrid || moreGrid) {
+  if (MK && (blogGrid || moreGrid)) {
     getJSON('/articles').then(function (list) {
       if (!Array.isArray(list)) return;
       if (blogGrid) {
-        blogGrid.innerHTML = list.length ? list.map(function (a) { return postCard(a, 'h2'); }).join('') : '<li class="pempty">Nuovi articoli in arrivo.</li>';
+        blogGrid.innerHTML = list.length ? list.map(function (a) { return postCard(a, 'h2'); }).join('') : MK.EMPTY_POSTS;
       }
       if (moreGrid) {
-        var others = list.filter(function (a) { return a.slug !== postSlug; }).slice(0, 2);
+        var others = MK.otherPosts(list, postSlug);
         if (others.length) moreGrid.innerHTML = others.map(function (a) { return postCard(a, 'h3'); }).join('');
         else moreGrid.closest('section').hidden = true;
       }
     }, function () { /* restano gli articoli scritti nell'HTML */ });
   }
 
-  // Pagina articolo: le pagine statiche si aggiornano con il testo dell'app; articolo.html lo carica da ?a=slug.
-  if (post && $('.prose-body', post)) {
+  // Pagina articolo: le pagine generate si aggiornano subito con il testo dell'app; articolo.html lo carica da ?a=slug.
+  if (MK && post && $('.prose-body', post)) {
     var dynamicPost = !post.getAttribute('data-article');
     var postMissing = function () {
       if (!dynamicPost) return; // pagina statica: resta il testo scritto nell'HTML
@@ -424,21 +304,19 @@
     };
     if (!postSlug) postMissing();
     else getJSON('/articles/' + encodeURIComponent(postSlug)).then(function (a) {
-      document.title = plain(a.title) + ' | Marrakech Centro Estetico';
+      document.title = MK.plain(a.title) + ' | Marrakech Centro Estetico';
       var desc = $('meta[name="description"]');
       if (desc) desc.setAttribute('content', a.excerpt);
       $$('.post-cat').forEach(function (el) { el.textContent = a.category; });
-      $('.post-title', post).innerHTML = titleHtml(a.title);
+      $('.post-title', post).innerHTML = MK.titleHtml(a.title);
       $('.post-lead', post).textContent = a.excerpt;
-      var d = String(a.publishedAt || '').slice(0, 10);
-      $('.post-meta', post).innerHTML = (d ? '<time datetime="' + esc(d) + '">' + dateIt(d) + '</time> · ' : '') +
-        a.readingMinutes + (a.readingMinutes === 1 ? ' minuto' : ' minuti') + ' di lettura';
-      var fig = $('.post-img', post), img = mediaUrl(a.coverUrl);
+      $('.post-meta', post).innerHTML = MK.postMeta(a);
+      var fig = $('.post-img', post), img = MK.coverImg(a, API_BASE);
       if (fig) {
         fig.hidden = !img;
-        if (img) fig.innerHTML = '<img src="' + esc(img) + '" width="1024" height="1280" alt="' + esc(a.coverAlt || '') + '" fetchpriority="high">';
+        if (img) fig.innerHTML = img;
       }
-      $('.prose-body', post).innerHTML = markdown(a.body);
+      $('.prose-body', post).innerHTML = MK.markdown(a.body);
       post.removeAttribute('aria-busy');
     }, postMissing);
   }

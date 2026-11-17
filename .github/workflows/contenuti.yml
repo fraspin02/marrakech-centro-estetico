@@ -1,0 +1,64 @@
+# Contenuti dall'app (D22): rigenera schede prodotto, blog, pagine degli articoli e sitemap con i dati
+# dell'API, così Google e le anteprime dei link li vedono senza JavaScript.
+#
+# Parte quando l'API avvisa che qualcosa è cambiato (repository_dispatch "contenuti"), a mano da
+# Actions → "Contenuti dall'app" → Run workflow, e ogni notte come rete di sicurezza.
+# Serve la variabile del repository API_BASE (Settings → Secrets and variables → Actions → Variables),
+# es. https://api.<dominio>. Finché manca, il job viene saltato.
+name: Contenuti dall'app
+
+on:
+  repository_dispatch:
+    types: [contenuti]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: write
+  pages: write
+
+# Un giro alla volta; se ne arrivano altri nel frattempo, parte solo l'ultimo.
+concurrency:
+  group: contenuti
+  cancel-in-progress: false
+
+jobs:
+  genera:
+    if: vars.API_BASE != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Genera le pagine
+        env:
+          API_BASE: ${{ vars.API_BASE }}
+        run: node scripts/build-content.mjs
+
+      - name: Pubblica le modifiche
+        id: commit
+        run: |
+          git add -A -- '*.html' sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da pubblicare."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Contenuti aggiornati dall'app"
+          git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Il sito si pubblica dal branch main: un push fatto dall'Action non sempre fa ripartire GitHub Pages,
+      # quindi la ripubblicazione si chiede esplicitamente.
+      - name: Ripubblica GitHub Pages
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"

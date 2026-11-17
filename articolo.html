@@ -1,12 +1,13 @@
 <!doctype html>
-<!-- Pagina degli articoli scritti dal gestionale dell'app (D19): il contenuto arriva dall'API, articolo.html?a=<indirizzo>. -->
+<!-- Pagina di passaggio per gli articoli appena pubblicati dall'app (D19), articolo.html?a=<indirizzo>: il contenuto arriva
+     dall'API nel browser. È anche il modello da cui scripts/build-content.mjs genera le pagine blog-<indirizzo>.html (D22). -->
 <html lang="it">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Blog | Marrakech Centro Estetico, Bellizzi</title>
 <meta name="description" content="Consigli di bellezza dal centro estetico Marrakech di Bellizzi.">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#FBF7F0">
 <meta name="format-detection" content="telephone=no">
 
@@ -31,6 +32,7 @@
 
 <script>document.documentElement.className += ' js';</script>
 <link rel="stylesheet" href="css/style.css?v=7">
+<!-- mk:head --><!-- /mk:head -->
 
 </head>
 <body>
@@ -88,7 +90,9 @@
       <figure class="post-img intro" style="--i:5" hidden></figure>
       <div class="prose">
         <div class="prose-body">
+          <!-- mk:testo -->
           <noscript><p>Per leggere l'articolo serve JavaScript. Trovi tutti gli articoli nel <a href="blog.html">blog</a>.</p></noscript>
+          <!-- /mk:testo -->
         </div>
         <aside class="post-cta">
           <p>Prenota dall'app scegliendo giorno e ora, oppure chiamaci al <a href="tel:+393206223880">320 622 3880</a>.</p>
@@ -101,7 +105,9 @@
   <section class="section blog-more" aria-labelledby="t-altri">
     <div class="wrap">
       <h2 id="t-altri" class="reveal">Leggi <em>anche</em></h2>
-      <ul class="bgrid two" id="bgrid-more"></ul>
+      <ul class="bgrid two" id="bgrid-more">
+        <!-- mk:altri --><!-- /mk:altri -->
+      </ul>
     </div>
   </section>
 
@@ -161,6 +167,7 @@
 </footer>
 
 
-<script src="js/main.js?v=8" defer></script>
+<script src="js/render.js?v=1" defer></script>
+<script src="js/main.js?v=9" defer></script>
 </body>
 </html>
