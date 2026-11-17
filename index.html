@@ -41,7 +41,7 @@
 <link rel="preload" as="image" href="img/amb-cabina-1536.webp" imagesrcset="img/amb-cabina-960.webp 960w, img/amb-cabina-1536.webp 1536w" imagesizes="(max-width: 900px) 100vw, 50vw">
 
 <script>document.documentElement.className += ' js';</script>
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 
 <script type="application/ld+json">
 {
@@ -66,6 +66,11 @@
       },
       "geo": { "@type": "GeoCoordinates", "latitude": 40.6216259, "longitude": 14.9540937 },
       "hasMap": "https://maps.google.com/?cid=3535496541681993419",
+      "priceRange": "3–300 €",
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "20:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "18:00" }
+      ],
       "sameAs": [
         "https://www.instagram.com/_marrakech_estetico/",
         "https://www.facebook.com/people/Marrakech/100091497715683/",
@@ -107,8 +112,8 @@
         { "@type": "Question", "name": "Quali trattamenti fate a Bellizzi?", "acceptedAnswer": { "@type": "Answer", "text": "Ricostruzione unghie in gel e acrygel e nail art, trattamenti viso, massaggi e trattamenti corpo, epilazione laser, microblading per sopracciglia e make-up per eventi." } },
         { "@type": "Question", "name": "Posso acquistare i vostri prodotti online?", "acceptedAnswer": { "@type": "Answer", "text": "No, non facciamo vendita online. I prodotti Marrakech si acquistano direttamente in centro, in Via Napoli 95A a Bellizzi. Scrivici su WhatsApp per disponibilità e prezzi." } },
         { "@type": "Question", "name": "Latte, struccante e tonico vanno bene per le pelli sensibili?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, la linea detersione è pensata per tutti i tipi di pelle, anche le più sensibili. Se hai dubbi, chiedici un consiglio prima dell'acquisto." } },
-        { "@type": "Question", "name": "Quanto costano trattamenti e prodotti?", "acceptedAnswer": { "@type": "Answer", "text": "Il prezzo dipende dal trattamento o dal prodotto. Per il listino aggiornato chiamaci al +39 320 622 3880; per i prodotti puoi scriverci anche su WhatsApp." } },
-        { "@type": "Question", "name": "Quali sono gli orari del centro?", "acceptedAnswer": { "@type": "Answer", "text": "Orari e posti liberi li trovi nella nostra app. Per qualsiasi dubbio chiamaci al +39 320 622 3880." } }
+        { "@type": "Question", "name": "Quanto costano trattamenti e prodotti?", "acceptedAnswer": { "@type": "Answer", "text": "Qualche esempio, IVA inclusa: manicure 7 €, semipermanente mani 15 €, ricostruzione unghie da 30 €, pulizia viso da 20 €, massaggi da 20 €, epilazione laser da 10 € a zona, microblading 200 €. Il listino completo è nell'app; per i prodotti scrivici su WhatsApp." } },
+        { "@type": "Question", "name": "Quali sono gli orari del centro?", "acceptedAnswer": { "@type": "Answer", "text": "Siamo aperti dal lunedì al venerdì dalle 9:00 alle 20:00, senza pausa pranzo, e il sabato dalle 8:00 alle 18:00. La domenica siamo chiusi. Lavoriamo su appuntamento: prenota dall'app o chiamaci al +39 320 622 3880." } }
       ]
     }
   ]
@@ -148,6 +153,7 @@
       <a href="#prenota">Prenota</a>
       <a href="#dove-siamo">Dove siamo</a>
       <a href="#faq">Domande</a>
+      <a href="blog.html">Blog</a>
       <a class="nav-app" href="#prenota"><svg class="ico" aria-hidden="true"><use href="#i-dl"/></svg>Scarica l'app</a>
     </nav>
     <a class="btn btn-dark btn-sm header-cta" href="#prenota"><svg class="ico" aria-hidden="true"><use href="#i-dl"/></svg>Scarica l'app</a>
@@ -169,12 +175,12 @@
         </h1>
         <p class="hero-lead intro" style="--i:3">Unghie, viso, corpo, laser e una linea di prodotti professionali con il nostro nome. Un piccolo rifugio dal gusto marocchino, in Via Napoli.</p>
         <div class="actions intro" style="--i:4">
-          <a class="btn btn-dark" href="#prenota" data-store="auto"><svg class="ico" aria-hidden="true"><use href="#i-dl"/></svg>Prenota dall'app</a>
+          <a class="btn btn-dark" href="#prenota" data-store="auto">Prenota ora</a>
           <a class="btn btn-line" href="tel:+393206223880"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>320 622 3880</a>
         </div>
         <ul class="hero-meta intro" style="--i:5">
           <li><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg><a href="https://maps.google.com/?cid=3535496541681993419" target="_blank" rel="noopener">Via Napoli, 95A · Bellizzi</a></li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg><span>Orari e posti liberi nell'app</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg><span>Lun–Ven 9–20 · Sab 8–18</span></li>
         </ul>
       </div>
 
@@ -217,6 +223,8 @@
             <div class="ex-panel" id="ex-p0" role="region" aria-labelledby="ex-b0">
               <img class="ex-mimg" src="img/amb-unghie-800.webp" width="800" height="1000" alt="" loading="lazy" decoding="async">
               <p>Ricostruzione e copertura in gel e acrygel, refill e nail art: mani curate, dalla forma al dettaglio, da sfoggiare ogni giorno.</p>
+              <p class="ex-from">A partire da <strong>7 €</strong></p>
+              <ul class="ex-prices"><li><span>Manicure</span><span>7 €</span></li><li><span>Semipermanente mani</span><span>15 €</span></li><li><span>Refill</span><span>25 €</span></li><li><span>Ricostruzione gel / acrygel</span><span>da 30 €</span></li></ul>
               <a class="link-arrow" href="#prenota">Prenota dall'app<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </li>
@@ -225,6 +233,8 @@
             <div class="ex-panel" id="ex-p1" role="region" aria-labelledby="ex-b1">
               <img class="ex-mimg" src="img/amb-viso-800.webp" width="800" height="1000" alt="" loading="lazy" decoding="async">
               <p>Pulizia e trattamenti viso scelti insieme in base alla tua pelle, con i prodotti della nostra linea professionale.</p>
+              <p class="ex-from">A partire da <strong>20 €</strong></p>
+              <ul class="ex-prices"><li><span>Pulizia viso</span><span>da 20 €</span></li><li><span>Trattamenti viso mirati</span><span>da 25 €</span></li><li><span>Pulizia viso con ultrasuoni</span><span>30 €</span></li><li><span>Needling</span><span>40 €</span></li></ul>
               <a class="link-arrow" href="#prenota">Prenota dall'app<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </li>
@@ -233,6 +243,8 @@
             <div class="ex-panel" id="ex-p2" role="region" aria-labelledby="ex-b2">
               <img class="ex-mimg" src="img/amb-massaggio-800.webp" width="800" height="1000" alt="" loading="lazy" decoding="async">
               <p>Massaggi e trattamenti corpo, tra cui il Thalasso, con le nostre creme ad alta massaggiabilità. Un momento tutto tuo.</p>
+              <p class="ex-from">A partire da <strong>20 €</strong></p>
+              <ul class="ex-prices"><li><span>Massaggio drenante o anticellulite</span><span>20 €</span></li><li><span>Massaggio relax o decontratturante</span><span>30 €</span></li><li><span>Bagno turco</span><span>da 25 €</span></li><li><span>Bagno turco con massaggio</span><span>50 €</span></li></ul>
               <a class="link-arrow" href="#prenota">Prenota dall'app<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </li>
@@ -241,6 +253,8 @@
             <div class="ex-panel" id="ex-p3" role="region" aria-labelledby="ex-b3">
               <img class="ex-mimg" src="img/amb-laser-800.webp" width="800" height="1000" alt="" loading="lazy" decoding="async">
               <p>Un'alternativa alla ceretta. Ti spieghiamo come funziona e quante sedute servono nel tuo caso, prima di iniziare.</p>
+              <p class="ex-from">A partire da <strong>10 €</strong></p>
+              <ul class="ex-prices"><li><span>Baffetti</span><span>10 €</span></li><li><span>Ascelle</span><span>18 €</span></li><li><span>Inguine</span><span>25 €</span></li><li><span>Gamba intera</span><span>60 €</span></li></ul>
               <a class="link-arrow" href="#prenota">Prenota dall'app<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </li>
@@ -249,6 +263,8 @@
             <div class="ex-panel" id="ex-p4" role="region" aria-labelledby="ex-b4">
               <img class="ex-mimg" src="img/amb-sopracciglia-800.webp" width="800" height="1000" alt="" loading="lazy" decoding="async">
               <p>Sopracciglia più piene e definite, disegnate pelo per pelo sulla forma del tuo viso.</p>
+              <p class="ex-from">A partire da <strong>200 €</strong></p>
+              <ul class="ex-prices"><li><span>Microblading sopracciglia</span><span>200 €</span></li><li><span>Ritocco annuale</span><span>100 €</span></li></ul>
               <a class="link-arrow" href="#prenota">Prenota dall'app<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </li>
@@ -257,6 +273,8 @@
             <div class="ex-panel" id="ex-p5" role="region" aria-labelledby="ex-b5">
               <img class="ex-mimg" src="img/amb-makeup-800.webp" width="800" height="1000" alt="" loading="lazy" decoding="async">
               <p>Trucco per cerimonie, feste e occasioni speciali, su prenotazione. Prenota per tempo nei periodi di festa.</p>
+              <p class="ex-from">A partire da <strong>25 €</strong></p>
+              <ul class="ex-prices"><li><span>Trucco giornaliero</span><span>25 €</span></li><li><span>Trucco cerimonia</span><span>50 €</span></li><li><span>Trucco sposa</span><span>300 €</span></li></ul>
               <a class="link-arrow" href="#prenota">Prenota dall'app<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </li>
@@ -272,7 +290,7 @@
           <figcaption><span class="ex-cap-n">01</span><span class="ex-cap-t">Unghie e nail art</span></figcaption>
         </figure>
       </div>
-      <p class="note">Per prezzi e posti liberi consulta l'app o chiamaci al 320 622 3880.</p>
+      <p class="note">Prezzi IVA inclusa. Il listino completo e i posti liberi sono nell'app, oppure chiamaci al 320 622 3880.</p>
     </div>
   </section>
 
@@ -311,10 +329,12 @@
           <div class="pbody">
             <p class="pcat">Detersione · Viso e occhi</p>
             <h3>Latte detergente</h3>
-            <p class="pdesc">Deterge e strucca delicatamente.</p>
+            <p class="pdesc">Il primo passo: toglie trucco e impurità senza tirare.</p>
           </div>
           <div class="pmore" hidden>
-            <p>Il primo passo della routine: rimuove trucco e impurità con delicatezza, adatto a tutti i tipi di pelle, anche le più sensibili.</p>
+            <p>Una texture morbida che scioglie trucco e impurità e lascia la pelle elastica, senza la sensazione di pelle che tira. Con provitamina B5, aloe e vitamine E e C, va bene anche per le pelli più sensibili.</p>
+            <h4>Come si usa</h4>
+            <p>Mattina e sera su viso e occhi, con un dischetto di cotone. Poi passa il tonico.</p>
             <h4>Ingredienti in evidenza</h4>
             <ul class="chips"><li>Provitamina B5</li><li>Semi di lino</li><li>Olivo</li><li>Aloe</li><li>Vitamine E e C</li></ul>
           </div>
@@ -325,10 +345,14 @@
           <div class="pbody">
             <p class="pcat">Antiage · Acido ialuronico</p>
             <h3>Filler all'acido ialuronico</h3>
-            <p class="pdesc">Correttore rughe.</p>
+            <p class="pdesc">Mirato sulle rughe d'espressione.</p>
           </div>
           <div class="pmore" hidden>
-            <p>Un trattamento mirato sulle rughe d'espressione, in pratico flacone airless da usare a casa tra un trattamento e l'altro.</p>
+            <p>Si applica in punti precisi: fronte, solchi naso-labiali, rughe intorno alla bocca. L'acido ialuronico trattiene l'acqua nella pelle, che appare più distesa e piena. Il flacone airless protegge il prodotto dall'aria fino all'ultima goccia.</p>
+            <h4>Come si usa</h4>
+            <p>La sera, su pelle pulita e tonificata: poco prodotto picchiettato sulle rughe, poi la tua crema.</p>
+            <h4>Da provare in centro</h4>
+            <p>Trattamento viso all'acido ialuronico, 30 €.</p>
             <h4>In evidenza</h4>
             <ul class="chips"><li>Acido ialuronico</li><li>Correttore rughe</li><li>Flacone airless</li></ul>
           </div>
@@ -339,12 +363,16 @@
           <div class="pbody">
             <p class="pcat">Corpo · Crema massaggio</p>
             <h3>Drenante</h3>
-            <p class="pdesc">Alta massaggiabilità.</p>
+            <p class="pdesc">Per gambe pesanti, dalle caviglie in su.</p>
           </div>
           <div class="pmore" hidden>
-            <p>Crema massaggio ad alta massaggiabilità nella versione drenante, ideale per i massaggi su gambe e corpo.</p>
+            <p>La versione per chi a fine giornata ha le gambe pesanti e gonfie. Scorre a lungo sotto le mani, così il massaggio può salire senza fermarsi dalle caviglie alle cosce, nel verso della circolazione.</p>
+            <h4>Come si usa</h4>
+            <p>La sera, se puoi con le gambe sollevate: passate lunghe dal basso verso l'alto.</p>
+            <h4>Da provare in centro</h4>
+            <p>Massaggio drenante, 20 €; pressoterapia, 15 €.</p>
             <h4>In evidenza</h4>
-            <ul class="chips"><li>Alta massaggiabilità</li><li>Formato professionale</li></ul>
+            <ul class="chips"><li>Gambe pesanti</li><li>Massaggio lungo</li><li>Alta massaggiabilità</li></ul>
           </div>
         </li>
         <li class="pcard" data-cat="corpo" data-slug="scrub-sali-marini">
@@ -353,10 +381,14 @@
           <div class="pbody">
             <p class="pcat">Corpo · Scrub</p>
             <h3>Scrub ai sali marini</h3>
-            <p class="pdesc">Profumazione Tropicale.</p>
+            <p class="pdesc">Pelle liscia, profumo Tropicale.</p>
           </div>
           <div class="pmore" hidden>
-            <p>Scrub corpo ai sali marini per una pelle levigata, nel barattolo in vetro con chiusura ermetica. Profumazione Tropicale.</p>
+            <p>I sali marini tolgono le cellule morte e lasciano la pelle liscia, pronta ad assorbire meglio le creme. Profumazione Tropicale, in un barattolo di vetro con chiusura ermetica che tiene il sale asciutto.</p>
+            <h4>Come si usa</h4>
+            <p>Una o due volte a settimana sotto la doccia, su pelle bagnata e con movimenti circolari, poi risciacqua. Evita viso e pelle irritata.</p>
+            <h4>Da provare in centro</h4>
+            <p>Scrub corpo, 20 €.</p>
             <h4>In evidenza</h4>
             <ul class="chips"><li>Sali marini</li><li>Tropicale</li><li>Barattolo in vetro</li></ul>
           </div>
@@ -369,6 +401,34 @@
     </div>
   </section>
 
+
+  <!-- RECENSIONI -->
+  <section class="section reviews" id="recensioni" aria-labelledby="t-recensioni">
+    <div class="wrap">
+      <header class="sec-head center reveal">
+        <p class="eyebrow"><svg class="star" aria-hidden="true"><use href="#o-star"/></svg>Recensioni<svg class="star" aria-hidden="true"><use href="#o-star"/></svg></p>
+        <h2 id="t-recensioni">Dicono <em>di noi</em></h2>
+      </header>
+      <div class="rv-grid">
+        <div class="rv-score reveal">
+          <p class="rv-num">5,0</p>
+          <p class="rv-stars" aria-label="5 stelle su 5"><span aria-hidden="true">★★★★★</span></p>
+          <p class="rv-src">Valutazione su Google</p>
+          <a class="link-arrow" href="https://maps.google.com/?cid=3535496541681993419" target="_blank" rel="noopener">Leggi su Google<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <figure class="rv-card reveal">
+          <p class="rv-stars" aria-label="5 stelle su 5"><span aria-hidden="true">★★★★★</span></p>
+          <blockquote><p>Accoglienza e professionalità. Consigliabile.</p></blockquote>
+          <figcaption><strong>Baldo A.</strong><span>Recensione su Google</span></figcaption>
+        </figure>
+        <div class="rv-cta reveal">
+          <h3>Sei già stata da noi?</h3>
+          <p>La tua opinione aiuta chi ci cerca per la prima volta. Bastano due righe su Google.</p>
+          <a class="btn btn-dark btn-sm" href="https://maps.google.com/?cid=3535496541681993419" target="_blank" rel="noopener">Lascia una recensione</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- PRENOTA -->
   <section class="section book" id="prenota" aria-labelledby="t-prenota">
@@ -387,7 +447,7 @@
         </ol>
         <div class="stores reveal">
           <a class="store" href="#prenota" data-store="ios"><svg class="ico" aria-hidden="true"><use href="#i-mobile"/></svg><span><small>Scarica su</small>App Store</span></a>
-          <a class="store" href="#prenota" data-store="android"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span><small>Disponibile su</small>Google Play</span></a>
+          <a class="store" href="#prenota" data-store="android"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span><small>Scarica su</small>Play Store</span></a>
         </div>
         <p class="book-alt reveal">Preferisci parlare con noi? <a href="tel:+393206223880">Chiamaci al 320 622 3880</a></p>
       </div>
@@ -404,7 +464,7 @@
         <dl class="loc-list">
           <div><dt><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Indirizzo</dt><dd>Via Napoli, 95A<br>84092 Bellizzi SA</dd></div>
           <div><dt><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Telefono</dt><dd><a href="tel:+393206223880">+39 320 622 3880</a></dd></div>
-          <div><dt><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Orari</dt><dd>Orari e posti liberi nell'app, oppure chiamaci.</dd></div>
+          <div><dt><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Orari</dt><dd><span class="hours"><span>Lunedì – venerdì</span><span>9:00 – 20:00</span><span>Sabato</span><span>8:00 – 18:00</span><span>Domenica</span><span>Chiuso</span></span></dd></div>
         </dl>
         <div class="actions">
           <a class="btn btn-gold" href="https://www.google.com/maps/dir/?api=1&amp;destination=Marrakech%20Centro%20Estetico%2C%20Via%20Napoli%2095A%2C%2084092%20Bellizzi%20SA" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-route"/></svg>Indicazioni</a>
@@ -449,12 +509,63 @@
         </details>
         <details>
           <summary><h3>Quanto costano trattamenti e prodotti?</h3><span class="fx" aria-hidden="true"></span></summary>
-          <div class="answer"><p>Il prezzo dipende dal trattamento o dal prodotto. Per il listino aggiornato chiamaci al +39 320 622 3880; per i prodotti puoi scriverci anche su WhatsApp.</p></div>
+          <div class="answer"><p>Qualche esempio, IVA inclusa: manicure 7 €, semipermanente mani 15 €, ricostruzione unghie da 30 €, pulizia viso da 20 €, massaggi da 20 €, epilazione laser da 10 € a zona, microblading 200 €. Il listino completo è nell'app; per i prodotti scrivici su WhatsApp.</p></div>
         </details>
         <details>
           <summary><h3>Quali sono gli orari del centro?</h3><span class="fx" aria-hidden="true"></span></summary>
-          <div class="answer"><p>Orari e posti liberi li trovi nella nostra app. Per qualsiasi dubbio chiamaci al +39 320 622 3880.</p></div>
+          <div class="answer"><p>Siamo aperti dal lunedì al venerdì dalle 9:00 alle 20:00, senza pausa pranzo, e il sabato dalle 8:00 alle 18:00. La domenica siamo chiusi. Lavoriamo su appuntamento: prenota dall'app o chiamaci al +39 320 622 3880.</p></div>
         </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="section blog-teaser" id="blog" aria-labelledby="t-blog">
+    <div class="wrap">
+      <header class="sec-head split reveal">
+        <div>
+          <p class="eyebrow"><svg class="star" aria-hidden="true"><use href="#o-star"/></svg>Dal blog</p>
+          <h2 id="t-blog">Consigli <em>di bellezza</em></h2>
+        </div>
+        <p class="sec-lead">Come scegliere il trattamento giusto, come prepararti e quanto costa. Spiegato semplice.</p>
+      </header>
+      <ul class="bgrid">
+        <li class="bcard reveal">
+          <a href="blog-semipermanente-ricostruzione-refill.html">
+            <figure class="bimg"><img src="img/amb-unghie-800.webp" width="800" height="1000" loading="lazy" decoding="async" alt=""></figure>
+            <div class="bbody">
+              <p class="pcat">Unghie · 4 min</p>
+              <h3>Semipermanente, ricostruzione o refill: quale scegliere</h3>
+              <p>Sono i tre trattamenti unghie che ci chiedete di più. Si somigliano, ma servono a cose diverse: ecco come capire qual è il tuo.</p>
+              <span class="link-arrow">Leggi<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </div>
+          </a>
+        </li>
+        <li class="bcard reveal">
+          <a href="blog-epilazione-laser-prima-seduta.html">
+            <figure class="bimg"><img src="img/amb-laser-800.webp" width="800" height="1000" loading="lazy" decoding="async" alt=""></figure>
+            <div class="bbody">
+              <p class="pcat">Epilazione laser · 4 min</p>
+              <h3>Epilazione laser: come prepararsi alla prima seduta</h3>
+              <p>Qualche regola semplice, prima e dopo, fa la differenza sul risultato. Ecco cosa sapere prima di prenotare.</p>
+              <span class="link-arrow">Leggi<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </div>
+          </a>
+        </li>
+        <li class="bcard reveal">
+          <a href="blog-bagno-turco.html">
+            <figure class="bimg"><img src="img/amb-massaggio-800.webp" width="800" height="1000" loading="lazy" decoding="async" alt=""></figure>
+            <div class="bbody">
+              <p class="pcat">Corpo e relax · 3 min</p>
+              <h3>Bagno turco: come funziona e come sceglierlo</h3>
+              <p>Calore umido, vapore e silenzio: è il rito più antico del nostro centro. Ecco come funziona e quale versione fa per te.</p>
+              <span class="link-arrow">Leggi<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <div class="shop-more reveal">
+        <a class="btn btn-line" href="blog.html">Tutti gli articoli<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -471,7 +582,7 @@
       <p>Scarica la nostra app e prenota il trattamento che desideri, quando vuoi.</p>
       <div class="stores center">
           <a class="store" href="#prenota" data-store="ios"><svg class="ico" aria-hidden="true"><use href="#i-mobile"/></svg><span><small>Scarica su</small>App Store</span></a>
-          <a class="store" href="#prenota" data-store="android"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span><small>Disponibile su</small>Google Play</span></a>
+          <a class="store" href="#prenota" data-store="android"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span><small>Scarica su</small>Play Store</span></a>
         </div>
       <a class="link-arrow finale-call" href="tel:+393206223880">Oppure chiamaci al 320 622 3880<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
@@ -488,6 +599,7 @@
       <div>
         <h2>Vieni a trovarci</h2>
         <address>Via Napoli, 95A<br>84092 Bellizzi SA<br><a href="tel:+393206223880">+39 320 622 3880</a></address>
+        <p class="foot-hours">Lun–Ven 9:00–20:00<br>Sabato 8:00–18:00<br>Domenica chiuso</p>
       </div>
       <div>
         <h2>Contatti</h2>
@@ -513,11 +625,6 @@
   </div>
 </footer>
 
-<nav class="mobile-bar" id="mobile-bar" aria-label="Contatto rapido">
-  <a class="btn btn-dark" href="#prenota" data-store="auto"><svg class="ico" aria-hidden="true"><use href="#i-dl"/></svg>Scarica l'app</a>
-  <a class="btn btn-line" href="tel:+393206223880"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Chiama</a>
-</nav>
-
 <dialog class="pdialog" id="pdialog" aria-labelledby="pd-title">
   <div class="pd-in">
     <button class="pd-close" type="button" data-close aria-label="Chiudi"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></button>
@@ -536,6 +643,6 @@
   </div>
 </dialog>
 
-<script src="js/main.js?v=5" defer></script>
+<script src="js/main.js?v=6" defer></script>
 </body>
 </html>

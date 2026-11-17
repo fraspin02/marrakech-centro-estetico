@@ -25,14 +25,12 @@
     });
   })();
 
-  /* Intestazione compatta dopo lo scroll + barra contatti mobile */
+  /* Intestazione compatta dopo lo scroll */
   var header = $('#header');
-  var bar = $('#mobile-bar');
   var ticking = false;
   function onScroll() {
     var y = window.scrollY;
     header.classList.toggle('is-stuck', y > 40);
-    if (bar) bar.classList.toggle('is-on', y > window.innerHeight * 0.7);
     parallax();
     ticking = false;
   }
