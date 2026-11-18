@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="-12 -12 24 24">
-<rect x="-12" y="-12" width="24" height="24" rx="4.5" fill="#FCF6EC"/>
-<polygon points="7.1,0 5,2.1 5,5 2.1,5 0,7.1 -2.1,5 -5,5 -5,2.1 -7.1,0 -5,-2.1 -5,-5 -2.1,-5 0,-7.1 2.1,-5 5,-5 5,-2.1" fill="none" stroke="#9C7838" stroke-width="1.1" stroke-linejoin="round"/>
-<circle r="2" fill="#9C7838"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="15.0 17.0 66.0 66.0">
+<rect x="15.0" y="17.0" width="66.0" height="66.0" rx="13" fill="#DA9609"/>
+<path d="M47.24,25.60 A24.42,24.42 0 1 0 71.11,63.13 A22.57,22.57 0 0 1 47.24,25.60Z" fill="#FFFFFF"/>
+<path d="M57.70,32.40 L59.98,37.85 L65.86,38.33 L61.38,42.18 L62.74,47.92 L57.70,44.85 L52.66,47.92 L54.02,42.18 L49.54,38.33 L55.42,37.85Z" fill="#FFFFFF"/>
 </svg>
