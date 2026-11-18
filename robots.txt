@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://fraspin02.github.io/marrakech-centro-estetico/sitemap.xml

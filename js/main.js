@@ -4,7 +4,7 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
-  var WA = 'https://wa.me/393206223880?text=';
+  var WA = 'https://wa.me/393533073361?text=';
 
   /* Link all'app di prenotazione. TODO-CLIENTE: incollare qui gli indirizzi dell'app negli store.
      Finché sono vuoti, i pulsanti portano alla sezione "Prenota" della home. */
