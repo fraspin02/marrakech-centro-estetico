@@ -328,4 +328,77 @@
       if (d.open) faqs.forEach(function (o) { if (o !== d) o.open = false; });
     });
   });
+  /* Consenso cookie. Il sito non usa cookie propri: l'unico contenuto di terze parti è la mappa
+     di Google, che si carica solo dopo il consenso (banner o "Mostra la mappa"). La scelta resta
+     nel browser 6 mesi (chiave "mk-consenso"), poi si chiede di nuovo. Vedi cookie.html. */
+  (function () {
+    var KEY = 'mk-consenso';
+    var MAX_AGE = 182 * 24 * 3600 * 1000;
+    var read = function () {
+      try {
+        var v = JSON.parse(localStorage.getItem(KEY));
+        if (v && typeof v.ok === 'boolean' && Date.now() - v.t < MAX_AGE) return v.ok;
+      } catch (e) {}
+      return null;
+    };
+    var save = function (ok) {
+      try { localStorage.setItem(KEY, JSON.stringify({ ok: ok, t: Date.now() })); } catch (e) {}
+    };
+
+    var map = $('[data-map-src]');
+    var gate = map && $('[data-map-gate]', map);
+    var showMap = function (on) {
+      if (!map) return;
+      var frame = $('iframe', map);
+      if (on && !frame) {
+        frame = document.createElement('iframe');
+        frame.src = map.getAttribute('data-map-src');
+        frame.title = map.getAttribute('data-map-title') || 'Mappa';
+        frame.loading = 'lazy';
+        frame.referrerPolicy = 'no-referrer-when-downgrade';
+        frame.allowFullscreen = true;
+        map.appendChild(frame);
+      } else if (!on && frame) {
+        map.removeChild(frame);
+      }
+      if (gate) gate.hidden = on;
+    };
+
+    var bar = document.createElement('div');
+    bar.className = 'cookie-bar';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Preferenze cookie');
+    bar.hidden = true;
+    bar.innerHTML =
+      '<p>Usiamo solo strumenti tecnici. Con il tuo consenso carichiamo la mappa di Google, che può impostare cookie di terze parti. <a href="cookie.html">Cookie policy</a></p>' +
+      '<div class="cookie-actions">' +
+      '<button class="btn btn-sm btn-line-light" type="button" data-choice="0">Rifiuta</button>' +
+      '<button class="btn btn-sm btn-line-light" type="button" data-choice="1">Accetta</button>' +
+      '</div>' +
+      '<button class="cookie-x" type="button" data-choice="0" aria-label="Chiudi e rifiuta"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></button>';
+    document.body.appendChild(bar);
+
+    var choose = function (ok) {
+      save(ok);
+      showMap(ok);
+      bar.hidden = true;
+    };
+    $$('[data-choice]', bar).forEach(function (b) {
+      b.addEventListener('click', function () { choose(b.getAttribute('data-choice') === '1'); });
+    });
+    $$('[data-map-load]').forEach(function (b) {
+      b.addEventListener('click', function () { choose(true); });
+    });
+    $$('[data-cookie-prefs]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        bar.hidden = false;
+        var first = $('button', bar);
+        if (first) first.focus();
+      });
+    });
+
+    var ok = read();
+    if (ok === null) bar.hidden = false;
+    showMap(ok === true);
+  })();
 })();
